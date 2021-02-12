@@ -1,0 +1,69 @@
+{% extends 'base.html' %} {% block title %} News Fight {% endblock %} {% block
+content %}
+<div class="d-flex justify-content-center mb-4">
+  <h1>News Fight</h1>
+</div>
+<div class="container mb-3">
+  <div class="row justify-content-md-center">
+    <dv class="form-group">
+      <form action="/search" class="searchForm"  method="POST">
+        <input
+          type="text"
+          class="searchInput"
+          id="topic_search"
+          name="topic_search"
+          placeholder="input a topic"
+        />
+        <button class="btn btn-primary">Search Articles</button>
+      </form>
+    </dv>
+  </div>
+</div>
+<div class="contaier">
+  <div class="row">
+    <div class="col">
+      <label for="left_sources">Choose a News Source</label>
+      <select name="left_sources" id="left_sources">
+        {% for source in sources %}
+        <option value="{{source['url']}}">{{source['name']}}</option>
+        {% endfor %}
+      </select>
+      <ul>
+        {% for article in cnn_stories %}
+        <li>
+          <div class="card">
+            <div class="card-body" data-story-index="{{loop.index0}}">
+              <h4>{{article['title']}}</h4>
+              <p class="lead">{{article['description']}}</p>
+            </div>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="col">
+      <label for="right_sources">Choose a News Source</label>
+      <select name="right_sources" id="right_sources">
+        {% for source in sources %}
+        <option value="{{source['url']}}">{{source['name']}}</option>
+        {% endfor %}
+      </select>
+      <ul>
+        {% for article in fox_stories %}
+        <li>
+          <div class="card">
+            <div class="card-body" data-story-index="{{loop.index0}}">
+              <h4>{{article['title']}}</h4>
+              <p class="lead">{{article['description']}}</p>
+            </div>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+<script src="{{ url_for('static', filename="JS/stateHandler.js") }}"></script> 
+
+{% endblock %}
