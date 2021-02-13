@@ -1,4 +1,4 @@
-from flask import render_template, url_for,request,jsonify, make_response
+from flask import render_template, url_for, request, jsonify, make_response
 from app import app
 from app.util import *
 import requests
@@ -29,7 +29,7 @@ def updated_search(topic):
         'right': fox_stories
     }
 
-    res = make_response(newsResponse,200)
+    res = make_response(newsResponse, 200)
     return res
 
     # return render_template('index.html', fox_stories=fox_stories, cnn_stories=cnn_stories)
