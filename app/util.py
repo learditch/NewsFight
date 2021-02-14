@@ -1,6 +1,8 @@
 import requests
+from app import db
 from app.secrets import API_KEY
-
+from app.models import NewsSources
+from urllib.parse import urlparse
 
 BASE_URL = 'https://newsapi.org/v2/'
 
@@ -22,7 +24,7 @@ def get_top(domain):
 
 
 class NewsData:
-    def __init__(self, domain='cnn.com', q='trump'):
+    def __init__(self, domain='usatoday.com/news', q='trump'):
         self.domain = domain
         self.q = q
         self.art_res = requests.get(f'{BASE_URL}/everything', params={'apiKey': API_KEY, 'q': q,
@@ -41,8 +43,27 @@ class NewsData:
     def getSources(self):
         source_list = []
         for source in self.source_data['sources']:
+
             source_list.append(source)
         return source_list
+
+
+def trimUrl(url):
+    o = urlparse(url)
+    if o.netloc.startswith('www.'):
+        newUrl = o.netloc[4:] + o.path
+    return newUrl
+
+
+def populateSources():
+    formatted_sources = []
+    res = NewsData()
+    sources = res.getSources()
+    for i in sources:
+        a = NewsSources(name=i['name'], full_url=i['url'],
+                        category=i['category'], language=i['language'])
+        db.session.add(a)
+    db.session.commit()
 
 
 # get all data at once, List of objects
