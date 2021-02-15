@@ -29,16 +29,17 @@ content %}
         <option value="{{source['formatted_url']}}">{{source['name']}}</option>
         {% endfor %}
       </select>
-      <h3> <a href="https://www.cnn.com">CNN</a> Top Stories Feb 1 - Feb 4 </h3>
+      <h3> <a href="https://www.cnn.com">CNN</a> Top Stories for <b>Trump</b> Feb 1 - Feb 4 </h3>
       <h4 class='column_title_leftpadded'>Average Objectivity Score: 4.3</h4>
           <!-- LEFT NEWS SOURCES-->        <!-- LEFT NEWS SOURCES- -->
-      <ul>
+
+      <ul class ='stories' id="stories-left">
         <!-- TEMPLATE -->        <!-- TEMPLATE -->
-        <li>
+        <!-- <li>
           <div class="card">
             <div class="card-body">
               <p>Objectivity Score: 4.6</p>
-              <img class="thumbnail" src="https://cdn.cnn.com/cnnnext/dam/assets/210202112943-lindsey-graham-liz-cheney-split-super-tease.jpg" alt="">
+              <img class="story-thumbnail" src="https://cdn.cnn.com/cnnnext/dam/assets/210202112943-lindsey-graham-liz-cheney-split-super-tease.jpg" alt="">
               <h4>Many voters feel betrayed after GOP lawmaker's impeachment vote</h4>
               <p class="lead">CNN's Kyung Lah speaks with Trump supporters in Washington state who say they feel betrayed after Rep. Dan Newhouse (R-WA) voted yes on the articles of impeachment of President Donald Trump.</p>
               <p>Author : Jill Filipovic</p>
@@ -46,9 +47,9 @@ content %}
               <a href='https://www.cnn.com/videos/politics/2021/02/03/donald-trump-supporters-dan-newhouse-impeachment-vote-lah-pgk-vpx-lead.cnn'>Link to Full story</a>
             </div>
           </div>
-        </li>
-       
+        </li> -->
          <!-- TEMPLATE -->        <!-- TEMPLATE -->
+
         {% for article in cnn_stories %}
         <li>
           <div class="card">
@@ -71,7 +72,7 @@ content %}
         {% endfor %}
       </select>
           <!-- RIGHT NEWS SOURCES-->        <!-- RIGHT NEWS SOURCES- -->
-      <ul>
+      <ul class ='stories' id="stories-right">
         {% for article in fox_stories %}
         <li>
           <div class="card">
@@ -86,6 +87,8 @@ content %}
     </div>
   </div>
 </div>
+<!-- Library JS & our JS -->
+<script src="https://unpkg.com/jquery"></script>
 <script type="module" src="/static/js/modules/api.js"></script> 
 <script type="module" src="{{ url_for('static', filename="JS/stateHandler.js") }}"></script> 
 
