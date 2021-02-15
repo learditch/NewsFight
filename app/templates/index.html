@@ -22,14 +22,16 @@ content %}
 <div class="contaier">
   <div class="row">
     <div class="col">
+       <!-- LEFT NEWS SOURCES-->        <!-- LEFT NEWS SOURCES- -->
       <label for="left_sources">Choose a News Source</label>
       <select name="left_sources" id="left_sources">
         {% for source in sources %}
-        <option value="{{source['url']}}">{{source['name']}}</option>
+        <option value="{{source['formatted_url']}}">{{source['name']}}</option>
         {% endfor %}
       </select>
       <h3> <a href="https://www.cnn.com">CNN</a> Top Stories Feb 1 - Feb 4 </h3>
       <h4 class='column_title_leftpadded'>Average Objectivity Score: 4.3</h4>
+          <!-- LEFT NEWS SOURCES-->        <!-- LEFT NEWS SOURCES- -->
       <ul>
         <!-- TEMPLATE -->        <!-- TEMPLATE -->
         <li>
@@ -60,7 +62,7 @@ content %}
         {% endfor %}
       </ul>
     </div>
-
+    <!-- RIGHT NEWS SOURCES-->        <!-- RIGHT NEWS SOURCES- -->
     <div class="col">
       <label for="right_sources">Choose a News Source</label>
       <select name="right_sources" id="right_sources">
@@ -68,6 +70,7 @@ content %}
         <option value="{{source['url']}}">{{source['name']}}</option>
         {% endfor %}
       </select>
+          <!-- RIGHT NEWS SOURCES-->        <!-- RIGHT NEWS SOURCES- -->
       <ul>
         {% for article in fox_stories %}
         <li>

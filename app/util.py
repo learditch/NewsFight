@@ -10,7 +10,6 @@ BASE_URL = 'https://newsapi.org/v2/'
 # make a call to api to get the top stories from fox
 # to get a speciif story use data html elements stored during intial load of page
 
-
 # https://newsapi.org/v2/everything?q=fire&from=2020-09-09&to=2020-09-09&domains=foxnews.com&sortBy=popularity&apiKey=b31bcb1b64a847a6ae2e34abd641b31c
 
 
@@ -59,7 +58,7 @@ def trimUrl(url):
     return newUrl
 
 
-def populateSources():
+def populateSourcesTable():
     res = NewsData()
     sources = res.getSources()
     for i in sources:
@@ -69,23 +68,14 @@ def populateSources():
     db.session.commit()
 
 
-# get all data at once, List of objects
-
-# def get_ap_top():
-#     res = newsapi.get_top_headlines(sources='reuters')
-#     return res
-#     # for article in res['articles']:
-#     #     titles.append(article['title'])
-#     # print(titles)
-
-
-# def get_msnbc_top():
-#     res = newsapi.get_top_headlines(sources='msnbc')
-#     print(res['articles'][1])
-
-
-# def get_fox_top():
-#     res = newsapi.get_top_headlines(
-#         sources='fox-news', q='Trump', category='politics', language='en', country='us')
-#     print(res['articles'][1]['title'])
-#     print(res['articles'][1]['description'])
+def sourcesQuery():
+    sourcesQuery = NewsSources.query.all()
+    sourceList = []
+    for s in sourcesQuery:
+        sourceList.append({'name': s.name,
+                           'full_url': s.full_url,
+                           'formatted_url': s.formatted_url,
+                           'category': s.category,
+                           'lang': s.language
+                           })
+    return sourceList
