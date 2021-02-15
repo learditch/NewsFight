@@ -28,13 +28,32 @@ content %}
         <option value="{{source['url']}}">{{source['name']}}</option>
         {% endfor %}
       </select>
+      <h3> <a href="https://www.cnn.com">CNN</a> Top Stories Feb 1 - Feb 4 </h3>
+      <h4 class='column_title_leftpadded'>Average Objectivity Score: 4.3</h4>
       <ul>
+        <!-- TEMPLATE -->        <!-- TEMPLATE -->
+        <li>
+          <div class="card">
+            <div class="card-body">
+              <p>Objectivity Score: 4.6</p>
+              <img class="thumbnail" src="https://cdn.cnn.com/cnnnext/dam/assets/210202112943-lindsey-graham-liz-cheney-split-super-tease.jpg" alt="">
+              <h4>Many voters feel betrayed after GOP lawmaker's impeachment vote</h4>
+              <p class="lead">CNN's Kyung Lah speaks with Trump supporters in Washington state who say they feel betrayed after Rep. Dan Newhouse (R-WA) voted yes on the articles of impeachment of President Donald Trump.</p>
+              <p>Author : Jill Filipovic</p>
+              <p>Published At: 2021-02-03T11:02:47Z </p>
+              <a href='https://www.cnn.com/videos/politics/2021/02/03/donald-trump-supporters-dan-newhouse-impeachment-vote-lah-pgk-vpx-lead.cnn'>Link to Full story</a>
+            </div>
+          </div>
+        </li>
+       
+         <!-- TEMPLATE -->        <!-- TEMPLATE -->
         {% for article in cnn_stories %}
         <li>
           <div class="card">
             <div class="card-body" data-story-index="{{loop.index0}}">
               <h4>{{article['title']}}</h4>
               <p class="lead">{{article['description']}}</p>
+              <p>{{article['description']}}</p>
             </div>
           </div>
         </li>

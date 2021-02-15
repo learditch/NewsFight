@@ -10,8 +10,11 @@ def index():
     # possibly call class methods in jinja?
     # fox_stories = NewsData('foxnews.com').getArticles()
     # cnn_stories = NewsData('cnn.com').getArticles()
-    sources = NewsData().getSources()
-    return render_template('index.html', sources=sources)
+    # sources = NewsData().getSources()
+
+    return render_template('index.html')
+    # return render_template('index.html', sources=sources, fox_stories=fox_stories,
+    #                        cnn_stories=cnn_stories)
 
 
 @app.route('/search/<topic>', methods=['GET', 'POST'])

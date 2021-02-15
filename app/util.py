@@ -2,7 +2,7 @@ import requests
 from app import db
 from app.secrets import API_KEY
 from app.models import NewsSources
-from urllib.parse import urlparse
+from urllib.parse import urlparse, urlsplit
 
 BASE_URL = 'https://newsapi.org/v2/'
 
@@ -50,17 +50,20 @@ class NewsData:
 
 def trimUrl(url):
     o = urlparse(url)
-    if o.netloc.startswith('www.'):
+    if o.netloc.startswith('www.') and len(o.path) > 1:
         newUrl = o.netloc[4:] + o.path
+    elif o.netloc.startswith('www.'):
+        newUrl = o.netloc[4:]
+    else:
+        newUrl = o.netloc
     return newUrl
 
 
 def populateSources():
-    formatted_sources = []
     res = NewsData()
     sources = res.getSources()
     for i in sources:
-        a = NewsSources(name=i['name'], full_url=i['url'],
+        a = NewsSources(name=i['name'], full_url=i['url'], formatted_url=trimUrl(i['url']),
                         category=i['category'], language=i['language'])
         db.session.add(a)
     db.session.commit()

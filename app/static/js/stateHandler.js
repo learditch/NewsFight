@@ -1,5 +1,5 @@
-import api from './modules/api.js'
-console.log("hi");
+import api from "./modules/api.js";
+console.log(api.testText());
 
 const searchParent = document.querySelector(".searchForm");
 const searchInput = document.querySelector(".searchInput");

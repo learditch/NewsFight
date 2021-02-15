@@ -10,4 +10,4 @@ class NewsSources(db.Model):
     language = db.Column(db.String(64))
 
     def __repr__(self):
-        return 'Source {}'.format(self.name)
+        return 'Source {} {} {}'.format(self.name, self.full_url, self.formatted_url)
