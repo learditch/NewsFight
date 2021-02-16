@@ -11,7 +11,6 @@ def index():
     # possibly call class methods in jinja?
     # fox_stories = NewsData('foxnews.com').getArticles()
     # cnn_stories = NewsData('cnn.com').getArticles()
-    # sources = NewsData().getSources()
     sources = sourcesQuery()
     return render_template('index.html', sources=sources)
     # return render_template('index.html', sources=sources, fox_stories=fox_stories,
@@ -24,13 +23,15 @@ def updated_search(topic):
     #     req = request.form
     #     topic = req.get('topic_search')
     #     lsource = req.get('left_sources')
+    req = request.get_json()
+    print(req['left_source'] + req['right_source'])
 
-    fox_stories = NewsData('foxnews.com', topic).getArticles()
-    cnn_stories = NewsData('cnn.com', topic).getArticles()
+    left_stories = NewsData(req['left_source'], topic).getArticles()
+    right_stories = NewsData(req['right_source'], topic).getArticles()
 
     newsResponse = {
-        'left': cnn_stories,
-        'right': fox_stories
+        'left': left_stories,
+        'right': right_stories
     }
 
     res = make_response(newsResponse, 200)

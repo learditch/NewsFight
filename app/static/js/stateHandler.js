@@ -6,6 +6,16 @@ const $leftStoriesList = $("#stories-left");
 const $rightStoriesList = $("#stories-right");
 let storyList;
 
+function getSources() {
+  const $leftSource = $("#left-sources").val();
+  const $rightSource = $("#right-sources").val();
+  const sources = {
+    left_source: $leftSource,
+    right_source: $rightSource,
+  };
+  return sources;
+}
+
 class Story {
   constructor({ author, description, publishedAt, title, url, urlToImage }) {
     this.author = author;
@@ -25,8 +35,7 @@ class StoryList {
   }
   static async getStories(topic) {
     try {
-      const res = await fetch(`${window.origin}/search/${topic}`);
-      const data = await res.json();
+      const data = await AJAX(`${window.origin}/search/${topic}`, getSources());
       const leftStories = data.left.map((story) => new Story(story));
       const rightStories = data.right.map((story) => new Story(story));
       return new StoryList(leftStories, rightStories);
@@ -75,6 +84,34 @@ function generateStoryMarkup(story) {
   `;
 }
 
+const timeout = function (s) {
+  return new Promise(function (_, reject) {
+    setTimeout(function () {
+      reject(new Error(`Request took too long! Timeout after ${s} second`));
+    }, s * 1000);
+  });
+};
+
+const AJAX = async function (url, uploadData) {
+  try {
+    const fetchPro = fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(uploadData),
+    });
+
+    const res = await Promise.race([fetchPro, timeout(5)]);
+    const data = await res.json();
+
+    if (!res.ok) throw new Error(`${data.message} (${res.status})`);
+    return data;
+  } catch (err) {
+    throw err;
+  }
+};
+
 const getQuery = function () {
   return searchInput.value;
 };
@@ -82,7 +119,6 @@ const getQuery = function () {
 searchParent.addEventListener("submit", async function (e) {
   e.preventDefault();
   const topic = getQuery();
-  getAndShowStories(topic);
-  // if (!topic) return;
-  // await loadSearchResults(topic);
+  if (!topic) return;
+  await getAndShowStories(topic);
 });

@@ -24,15 +24,14 @@ content %}
     <div class="col">
        <!-- LEFT NEWS SOURCES-->        <!-- LEFT NEWS SOURCES- -->
       <label for="left_sources">Choose a News Source</label>
-      <select name="left_sources" id="left_sources">
+      <select name="left_sources" id="left-sources">
         {% for source in sources %}
         <option value="{{source['formatted_url']}}">{{source['name']}}</option>
         {% endfor %}
       </select>
       <h3> <a href="https://www.cnn.com">CNN</a> Top Stories for <b>Trump</b> Feb 1 - Feb 4 </h3>
       <h4 class='column_title_leftpadded'>Average Objectivity Score: 4.3</h4>
-          <!-- LEFT NEWS SOURCES-->        <!-- LEFT NEWS SOURCES- -->
-
+      <!-- LEFT NEWS SOURCES-->        <!-- LEFT NEWS SOURCES- -->
       <ul class ='stories' id="stories-left">
         <!-- TEMPLATE -->        <!-- TEMPLATE -->
         <!-- <li>
@@ -49,40 +48,20 @@ content %}
           </div>
         </li> -->
          <!-- TEMPLATE -->        <!-- TEMPLATE -->
-
-        {% for article in cnn_stories %}
-        <li>
-          <div class="card">
-            <div class="card-body" data-story-index="{{loop.index0}}">
-              <h4>{{article['title']}}</h4>
-              <p class="lead">{{article['description']}}</p>
-              <p>{{article['description']}}</p>
-            </div>
-          </div>
-        </li>
-        {% endfor %}
       </ul>
     </div>
+
     <!-- RIGHT NEWS SOURCES-->        <!-- RIGHT NEWS SOURCES- -->
     <div class="col">
       <label for="right_sources">Choose a News Source</label>
-      <select name="right_sources" id="right_sources">
+      <select name="right_sources" id="right-sources">
         {% for source in sources %}
-        <option value="{{source['url']}}">{{source['name']}}</option>
+        <option value="{{source['formatted_url']}}">{{source['name']}}</option>
         {% endfor %}
       </select>
           <!-- RIGHT NEWS SOURCES-->        <!-- RIGHT NEWS SOURCES- -->
       <ul class ='stories' id="stories-right">
-        {% for article in fox_stories %}
-        <li>
-          <div class="card">
-            <div class="card-body" data-story-index="{{loop.index0}}">
-              <h4>{{article['title']}}</h4>
-              <p class="lead">{{article['description']}}</p>
-            </div>
-          </div>
-        </li>
-        {% endfor %}
+
       </ul>
     </div>
   </div>
