@@ -6,16 +6,12 @@ from urllib.parse import urlparse, urlsplit
 
 BASE_URL = 'https://newsapi.org/v2/'
 
-# make a call to api to get the top stories from msnbc
-# make a call to api to get the top stories from fox
-# to get a speciif story use data html elements stored during intial load of page
-
 # https://newsapi.org/v2/everything?q=fire&from=2020-09-09&to=2020-09-09&domains=foxnews.com&sortBy=popularity&apiKey=b31bcb1b64a847a6ae2e34abd641b31c
 
 
 def get_top(domain):
     res = requests.get(f'{BASE_URL}/everything', params={'apiKey': API_KEY, 'q': 'covid',
-                                                         'from': '2021-02-02', 'to': '2021-02-03', 'domains': domain})
+                                                         'from': '2021-02-02', 'to': '2021-02-17', 'domains': domain})
     data = res.json()
     arts = data['articles']
     for art in arts:
@@ -23,11 +19,11 @@ def get_top(domain):
 
 
 class NewsData:
-    def __init__(self, domain='usatoday.com/news', q='trump'):
+    def __init__(self, domain='cnn.com', q='trump'):
         self.domain = domain
         self.q = q
         self.art_res = requests.get(f'{BASE_URL}/everything', params={'apiKey': API_KEY, 'q': q,
-                                                                      'from': '2021-02-02', 'to': '2021-02-03', 'domains': domain, 'sortBy': 'popularity'})
+                                                                      'from': '2021-02-02', 'to': '2021-02-17', 'domains': domain, 'sortBy': 'popularity'})
         self.art_data = self.art_res.json()
         self.source_res = requests.get(
             f'{BASE_URL}/sources', params={'apiKey': API_KEY, 'language': 'en'})

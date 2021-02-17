@@ -9,12 +9,8 @@ import requests
 @app.route('/index')
 def index():
     # possibly call class methods in jinja?
-    # fox_stories = NewsData('foxnews.com').getArticles()
-    # cnn_stories = NewsData('cnn.com').getArticles()
     sources = sourcesQuery()
     return render_template('index.html', sources=sources)
-    # return render_template('index.html', sources=sources, fox_stories=fox_stories,
-    #                        cnn_stories=cnn_stories)
 
 
 @ app.route('/search/<topic>', methods=['GET', 'POST'])
@@ -24,17 +20,16 @@ def updated_search(topic):
     #     topic = req.get('topic_search')
     #     lsource = req.get('left_sources')
     req = request.get_json()
-    print(req['left_source'] + req['right_source'])
-
+    print(req)
     left_stories = NewsData(req['left_source'], topic).getArticles()
     right_stories = NewsData(req['right_source'], topic).getArticles()
-
     newsResponse = {
-        'left': left_stories,
-        'right': right_stories
+        'left': {'source': [req['left_source_name'], req['left_source']],
+                 'overall_rating': 0,
+                 'stories': left_stories},
+        'right': {'source': [req['right_source_name'], req['right_source']],
+                  'overall_rating': 0,
+                  'stories': right_stories}
     }
-
     res = make_response(newsResponse, 200)
     return res
-
-    # return render_template('index.html', fox_stories=fox_stories, cnn_stories=cnn_stories)

@@ -1,5 +1,5 @@
 import api from "./modules/api.js";
-console.log(api.testText());
+// console.log(api.testText());
 const searchParent = document.querySelector(".searchForm");
 const searchInput = document.querySelector(".searchInput");
 const $leftStoriesList = $("#stories-left");
@@ -7,11 +7,15 @@ const $rightStoriesList = $("#stories-right");
 let storyList;
 
 function getSources() {
+  const $leftSourceName = $("#left-sources option:selected").text();
+  const $rightSourceName = $("#left-sources option:selected").text();
   const $leftSource = $("#left-sources").val();
   const $rightSource = $("#right-sources").val();
   const sources = {
     left_source: $leftSource,
+    left_source_name: $leftSourceName,
     right_source: $rightSource,
+    right_source_name: $rightSourceName,
   };
   return sources;
 }
@@ -36,8 +40,9 @@ class StoryList {
   static async getStories(topic) {
     try {
       const data = await AJAX(`${window.origin}/search/${topic}`, getSources());
-      const leftStories = data.left.map((story) => new Story(story));
-      const rightStories = data.right.map((story) => new Story(story));
+
+      const leftStories = data.left.stories.map((story) => new Story(story));
+      const rightStories = data.right.stories.map((story) => new Story(story));
       return new StoryList(leftStories, rightStories);
     } catch (err) {
       console.log(err);
@@ -47,14 +52,26 @@ class StoryList {
 
 async function getAndShowStories(topic) {
   storyList = await StoryList.getStories(topic);
+  console.log(storyList);
   //add loading wheel
+  putTitlesOnPage();
   putStoriesOnPage();
-  console.log(storyList.leftStories);
+}
+
+function putTitlesOnPage() {
+  let sources = getSources();
+  const leftColTitle = generateSourceTitle(sources.left_source);
+  const rightColTitle = generateSourceTitle(sources.right_source);
+  $rightStoriesList.append(rightColTitle);
+  $leftStoriesList.append(rightColTitle);
 }
 
 function putStoriesOnPage() {
   //combine loops?
   //empty story list html
+
+  // console.log(`${leftColTitle} and ${rightColTitle}`);
+
   for (let story of storyList.leftStories) {
     const $story = generateStoryMarkup(story);
     $leftStoriesList.append($story);
@@ -81,6 +98,13 @@ function generateStoryMarkup(story) {
     </div>
   </div>
 </li>
+  `;
+}
+
+function generateSourceTitle(source) {
+  return `
+  <h3> <a href="${source}">${source}</a> Top Stories for <b>Trump</b> Feb 1 - Feb 4 </h3>
+  <h4 class='column_title_leftpadded'>Average Objectivity Score: 4.3</h4>
   `;
 }
 
