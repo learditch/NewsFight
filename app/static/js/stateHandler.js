@@ -33,17 +33,26 @@ class Story {
 }
 
 class StoryList {
-  constructor(leftStories, rightStories) {
+  constructor(leftStoriesHl, leftStories, rightStoriesHl, rightStories) {
+    this.leftStoriesHl = leftStoriesHl;
     this.leftStories = leftStories;
+    this.rightStoriesHl = rightStoriesHl;
     this.rightStories = rightStories;
   }
   static async getStories(topic) {
     try {
       const data = await AJAX(`${window.origin}/search/${topic}`, getSources());
-
+      console.log(data);
+      const leftStoriesHl = data.left.headline;
       const leftStories = data.left.stories.map((story) => new Story(story));
+      const rightStoriesHl = data.right.headline;
       const rightStories = data.right.stories.map((story) => new Story(story));
-      return new StoryList(leftStories, rightStories);
+      return new StoryList(
+        leftStoriesHl,
+        leftStories,
+        rightStoriesHl,
+        rightStories
+      );
     } catch (err) {
       console.log(err);
     }
