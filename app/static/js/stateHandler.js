@@ -6,18 +6,28 @@ const $leftStoriesList = $("#stories-left");
 const $rightStoriesList = $("#stories-right");
 let storyList;
 
-function getSources() {
-  const $leftSourceName = $("#left-sources option:selected").text();
-  const $rightSourceName = $("#left-sources option:selected").text();
-  const $leftSource = $("#left-sources").val();
-  const $rightSource = $("#right-sources").val();
+function getSourceData() {
+  const $leftSource = $("#left-sources option:selected");
+  const $rightSource = $("#right-sources option:selected");
   const sources = {
-    left_source: $leftSource,
-    left_source_name: $leftSourceName,
-    right_source: $rightSource,
-    right_source_name: $rightSourceName,
+    left_source_full: $leftSource.data("fullurl"),
+    left_source: $leftSource.val(),
+    left_source_name: $leftSource.text(),
+    right_source_full: $rightSource.data("fullurl"),
+    right_source: $rightSource.val(),
+    right_source_name: $rightSource.text(),
   };
   return sources;
+}
+
+class Headline {
+  constructor({ date, sourceName, fullSourceUrl, topic, averageObjScore }) {
+    this.date = date;
+    this.sourceName = sourceName;
+    this.fullSourceUrl = fullSourceUrl;
+    this.topic = topic;
+    this.averageObjScore = averageObjScore;
+  }
 }
 
 class Story {
@@ -41,8 +51,11 @@ class StoryList {
   }
   static async getStories(topic) {
     try {
-      const data = await AJAX(`${window.origin}/search/${topic}`, getSources());
-      console.log(data);
+      const data = await AJAX(
+        `${window.origin}/search/${topic}`,
+        getSourceData()
+      );
+      // console.log(data);
       const leftStoriesHl = data.left.headline;
       const leftStories = data.left.stories.map((story) => new Story(story));
       const rightStoriesHl = data.right.headline;
@@ -63,23 +76,23 @@ async function getAndShowStories(topic) {
   storyList = await StoryList.getStories(topic);
   console.log(storyList);
   //add loading wheel
-  putTitlesOnPage();
   putStoriesOnPage();
-}
-
-function putTitlesOnPage() {
-  let sources = getSources();
-  const leftColTitle = generateSourceTitle(sources.left_source);
-  const rightColTitle = generateSourceTitle(sources.right_source);
-  $rightStoriesList.append(rightColTitle);
-  $leftStoriesList.append(rightColTitle);
 }
 
 function putStoriesOnPage() {
   //combine loops?
   //empty story list html
+  // let leftSourceName, leftSourceUrl, rightSourceName, rightSourceUrl;
+  // [leftSourceName, leftSourceUrl] = storyList.leftStoriesHl.source_info;
+  // [rightSourceName, rightSourceUrl] = storyList.rightStoriesHl.source_info;
+  // const leftHeadline = generateSourceHeadline(leftSourceUrl, leftSourceName);
+  // const rightHeadline = generateSourceHeadline(rightSourceUrl, rightSourceName);
 
-  // console.log(`${leftColTitle} and ${rightColTitle}`);
+  const leftHeadline = generateSourceHeadline(storyList.leftStoriesHl);
+  const rightHeadline = generateSourceHeadline(storyList.rightStoriesHl);
+
+  $leftStoriesList.append(leftHeadline);
+  $rightStoriesList.append(rightHeadline);
 
   for (let story of storyList.leftStories) {
     const $story = generateStoryMarkup(story);
@@ -103,17 +116,17 @@ function generateStoryMarkup(story) {
       <p class="lead story-description">${story.description}</p>
       <p class= 'story-author'>Author : ${story.author}</p>
       <p class= 'story-publishedAt'>Published At: ${story.publishedAt} </p>
-      <a class='story-url' href='${story.url}'>Link to Full story</a>
+      <a class='story-url' href='${story.url}' target=”_blank">Link to Full story</a>
     </div>
   </div>
 </li>
   `;
 }
 
-function generateSourceTitle(source) {
+function generateSourceHeadline(headline) {
   return `
-  <h3> <a href="${source}">${source}</a> Top Stories for <b>Trump</b> Feb 1 - Feb 4 </h3>
-  <h4 class='column_title_leftpadded'>Average Objectivity Score: 4.3</h4>
+  <h3> <a href="${headline.source_info[1]}" target=”_blank">${headline.source_info[0]}</a> Top Stories for <b>Trump</b> Feb 1 - Feb 4 </h3>
+  <h4 class='column_title_leftpadded'>Average Objectivity Score: ${headline.overall_rating}</h4>
   `;
 }
 

@@ -24,10 +24,12 @@ def updated_search(topic):
     left_stories = NewsData(req['left_source'], topic).getArticles()
     right_stories = NewsData(req['right_source'], topic).getArticles()
     newsResponse = {
-        'left': {'headline': {'source_info': [req['left_source_name'], req['left_source']],
+        'topic': topic,
+        'date': 'Feb 1 - Feb 2',
+        'left': {'headline': {'source_info': [req['left_source_name'], req['left_source_full']],
                               'overall_rating': 0},
                  'stories': left_stories},
-        'right': {'headline': {'source_info': [req['right_source_name'], req['right_source']],
+        'right': {'headline': {'source_info': [req['right_source_name'], req['right_source_full']],
                                'overall_rating': 0},
                   'stories': right_stories}
     }
