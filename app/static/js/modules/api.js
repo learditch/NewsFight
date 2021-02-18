@@ -3,17 +3,15 @@ export default {
     return "Test text";
   },
 
-  timeout: (s) => {
-    return new Promise(function (_, reject) {
+  getArticles: async (topic, uploadData) => {
+    var timeout = new Promise(function (_, reject) {
       setTimeout(function () {
-        reject(new Error(`Request took too long! Timeout after ${s} second`));
-      }, s * 1000);
+        reject(new Error(`Request took too long! Timeout after ${5} second`));
+      }, 5 * 1000);
     });
-  },
 
-  AJAX: async function (url, uploadData) {
     try {
-      const fetchPro = fetch(url, {
+      const fetchPro = fetch(`${window.origin}/search/${topic}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -21,7 +19,7 @@ export default {
         body: JSON.stringify(uploadData),
       });
 
-      const res = await Promise.race([fetchPro, timeout(5)]);
+      const res = await Promise.race([fetchPro, timeout]);
       const data = await res.json();
 
       if (!res.ok) throw new Error(`${data.message} (${res.status})`);
@@ -29,5 +27,5 @@ export default {
     } catch (err) {
       throw err;
     }
-  },
+  }
 };
