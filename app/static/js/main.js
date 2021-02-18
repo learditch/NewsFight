@@ -41,11 +41,11 @@ class StoryList {
   }
   static async getStories(topic) {
     try {
-      const data = await AJAX(
-        `${window.origin}/search/${topic}`,
-        getSourceData()
-      );
-      // console.log(data);
+      const data = await api.getArticles(
+          topic,
+          getSourceData()
+        );
+      console.log(data);
       const leftStoriesHl = data.left.headline;
       const leftStories = data.left.stories.map((story) => new Story(story));
       const rightStoriesHl = data.right.headline;
@@ -122,34 +122,6 @@ function clear() {
   $leftStoriesList.empty();
   $rightStoriesList.empty();
 }
-
-const timeout = function (s) {
-  return new Promise(function (_, reject) {
-    setTimeout(function () {
-      reject(new Error(`Request took too long! Timeout after ${s} second`));
-    }, s * 1000);
-  });
-};
-
-const AJAX = async function (url, uploadData) {
-  try {
-    const fetchPro = fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(uploadData),
-    });
-
-    const res = await Promise.race([fetchPro, timeout(5)]);
-    const data = await res.json();
-
-    if (!res.ok) throw new Error(`${data.message} (${res.status})`);
-    return data;
-  } catch (err) {
-    throw err;
-  }
-};
 
 const getQuery = function () {
   return searchInput.value;
