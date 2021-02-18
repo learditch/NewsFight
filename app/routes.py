@@ -23,6 +23,7 @@ def updated_search(topic):
     print(req)
     left_stories = NewsData(req['left_source'], topic).getArticles()
     right_stories = NewsData(req['right_source'], topic).getArticles()
+    print(left_stories)
     newsResponse = {
         'topic': topic,
         'date': 'Feb 1 - Feb 2',

@@ -1,4 +1,5 @@
 import requests
+from app.sentAn import sentiment_scores
 from app import db
 from app.secrets import API_KEY
 from app.models import NewsSources
@@ -24,7 +25,8 @@ class NewsData:
         articles_list = []
         for article in self.art_data['articles']:
             articles_list.append(article)
-        return articles_list
+        articles_analyzed = sentiment_scores(articles_list)
+        return articles_analyzed
 
     def getSources(self):
         source_list = []
