@@ -41,17 +41,10 @@ class StoryList {
   }
   static async getStories(topic) {
     try {
-<<<<<<< HEAD:app/static/js/stateHandler.js
-      const data = await AJAX(
-        `${window.origin}/search/${topic}`,
-        getSourceData()
-      );
-=======
       const data = await api.getArticles(
           topic,
           getSourceData()
         );
->>>>>>> a25e0e7c13e706dc27ecd8a1b76f5e4c70c77741:app/static/js/main.js
       console.log(data);
       const leftStoriesHl = data.left.headline;
       const leftStories = data.left.stories.map((story) => new Story(story));
