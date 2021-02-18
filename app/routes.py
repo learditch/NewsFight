@@ -5,6 +5,11 @@ from app.util import NewsData, sourcesQuery
 import requests
 
 
+# @app.errorhandler(500)
+# def serverError(error):
+#     return jsonify({'message': ' Query Not Found, Please try again'}), 500
+
+
 @app.route('/')
 @app.route('/index')
 def index():
@@ -20,17 +25,18 @@ def updated_search(topic):
     #     topic = req.get('topic_search')
     #     lsource = req.get('left_sources')
     req = request.get_json()
-    left_stories = NewsData(req['left_source'], topic).getArticles()
-    right_stories = NewsData(req['right_source'], topic).getArticles()
+    left_stories_data = NewsData(req['left_source'], topic).getArticles()
+    right_stories_data = NewsData(req['right_source'], topic).getArticles()
+    # print(left_stories_data)
     newsResponse = {
         'topic': topic,
         'date': 'Feb 1 - Feb 2',
         'left': {'headline': {'source_info': [req['left_source_name'], req['left_source_full']],
-                              'overall_rating': 0},
-                 'stories': left_stories},
+                              'average_ratings': left_stories_data['articleScores']},
+                 'stories': left_stories_data['articleList']},
         'right': {'headline': {'source_info': [req['right_source_name'], req['right_source_full']],
-                               'overall_rating': 0},
-                  'stories': right_stories}
+                               'average_ratings': right_stories_data['articleScores']},
+                  'stories': right_stories_data['articleList']}
     }
     res = make_response(newsResponse, 200)
     return res

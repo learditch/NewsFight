@@ -25,8 +25,11 @@ class NewsData:
         articles_list = []
         for article in self.art_data['articles']:
             articles_list.append(article)
-        articles_analyzed = sentiment_scores(articles_list)
-        return articles_analyzed
+        articles_scores = sentiment_scores(articles_list)
+        article_data = {'articleList': articles_list,
+                        'articleScores': articles_scores}
+        # print(article_data)
+        return article_data
 
     def getSources(self):
         source_list = []

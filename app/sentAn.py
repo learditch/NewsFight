@@ -19,5 +19,5 @@ def sentiment_scores(stories):
     total_scores_avg.update(
         {'overallCompoundAvg': (average(total_scores, 'compound')), 'overallNegAvg': (average(total_scores, 'neg')), 'overallNeuAvg': (average(total_scores, 'neu')), 'overallPosAvg': (average(total_scores, 'pos'))})
 
-    stories.insert(0, total_scores_avg)
-    return stories
+    # stories.insert(0, total_scores_avg)
+    return total_scores_avg
