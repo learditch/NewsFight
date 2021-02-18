@@ -20,16 +20,6 @@ function getSourceData() {
   return sources;
 }
 
-class Headline {
-  constructor({ date, sourceName, fullSourceUrl, topic, averageObjScore }) {
-    this.date = date;
-    this.sourceName = sourceName;
-    this.fullSourceUrl = fullSourceUrl;
-    this.topic = topic;
-    this.averageObjScore = averageObjScore;
-  }
-}
-
 class Story {
   constructor({ author, description, publishedAt, title, url, urlToImage }) {
     this.author = author;
@@ -85,8 +75,6 @@ function putStoriesOnPage() {
   // let leftSourceName, leftSourceUrl, rightSourceName, rightSourceUrl;
   // [leftSourceName, leftSourceUrl] = storyList.leftStoriesHl.source_info;
   // [rightSourceName, rightSourceUrl] = storyList.rightStoriesHl.source_info;
-  // const leftHeadline = generateSourceHeadline(leftSourceUrl, leftSourceName);
-  // const rightHeadline = generateSourceHeadline(rightSourceUrl, rightSourceName);
 
   const leftHeadline = generateSourceHeadline(storyList.leftStoriesHl);
   const rightHeadline = generateSourceHeadline(storyList.rightStoriesHl);
@@ -130,6 +118,11 @@ function generateSourceHeadline(headline) {
   `;
 }
 
+function clear() {
+  $leftStoriesList.empty();
+  $rightStoriesList.empty();
+}
+
 const timeout = function (s) {
   return new Promise(function (_, reject) {
     setTimeout(function () {
@@ -164,6 +157,7 @@ const getQuery = function () {
 
 searchParent.addEventListener("submit", async function (e) {
   e.preventDefault();
+  clear();
   const topic = getQuery();
   if (!topic) return;
   await getAndShowStories(topic);

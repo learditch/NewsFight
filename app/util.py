@@ -9,15 +9,6 @@ BASE_URL = 'https://newsapi.org/v2/'
 # https://newsapi.org/v2/everything?q=fire&from=2020-09-09&to=2020-09-09&domains=foxnews.com&sortBy=popularity&apiKey=b31bcb1b64a847a6ae2e34abd641b31c
 
 
-def get_top(domain):
-    res = requests.get(f'{BASE_URL}/everything', params={'apiKey': API_KEY, 'q': 'covid',
-                                                         'from': '2021-02-02', 'to': '2021-02-17', 'domains': domain})
-    data = res.json()
-    arts = data['articles']
-    for art in arts:
-        print(art)
-
-
 class NewsData:
     def __init__(self, domain='cnn.com', q='trump'):
         self.domain = domain
