@@ -45,7 +45,7 @@ class StoryList {
         `${window.origin}/search/${topic}`,
         getSourceData()
       );
-      // console.log(data);
+      console.log(data);
       const leftStoriesHl = data.left.headline;
       const leftStories = data.left.stories.map((story) => new Story(story));
       const rightStoriesHl = data.right.headline;
@@ -64,7 +64,7 @@ class StoryList {
 
 async function getAndShowStories(topic) {
   storyList = await StoryList.getStories(topic);
-  console.log(storyList);
+  // console.log(storyList);
   //add loading wheel
   putStoriesOnPage();
 }
