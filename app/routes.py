@@ -20,10 +20,8 @@ def updated_search(topic):
     #     topic = req.get('topic_search')
     #     lsource = req.get('left_sources')
     req = request.get_json()
-    print(req)
     left_stories = NewsData(req['left_source'], topic).getArticles()
     right_stories = NewsData(req['right_source'], topic).getArticles()
-    print(left_stories)
     newsResponse = {
         'topic': topic,
         'date': 'Feb 1 - Feb 2',
