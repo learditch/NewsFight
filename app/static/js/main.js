@@ -1,4 +1,6 @@
 import api from "./modules/api.js";
+import views from "./modules/views.js";
+
 // console.log(api.testText());
 const searchParent = document.querySelector(".searchForm");
 const searchInput = document.querySelector(".searchInput");
@@ -76,46 +78,21 @@ function putStoriesOnPage() {
   // [leftSourceName, leftSourceUrl] = storyList.leftStoriesHl.source_info;
   // [rightSourceName, rightSourceUrl] = storyList.rightStoriesHl.source_info;
 
-  const leftHeadline = generateSourceHeadline(storyList.leftStoriesHl);
-  const rightHeadline = generateSourceHeadline(storyList.rightStoriesHl);
+  const leftHeadline = views.generateSourceHeadline(storyList.leftStoriesHl);
+  const rightHeadline = views.generateSourceHeadline(storyList.rightStoriesHl);
 
   $leftStoriesList.append(leftHeadline);
   $rightStoriesList.append(rightHeadline);
 
   for (let story of storyList.leftStories) {
-    const $story = generateStoryMarkup(story);
+    const $story = views.generateStoryMarkup(story);
     $leftStoriesList.append($story);
   }
 
   for (let story of storyList.rightStories) {
-    const $story = generateStoryMarkup(story);
+    const $story = views.generateStoryMarkup(story);
     $rightStoriesList.append($story);
   }
-}
-
-function generateStoryMarkup(story) {
-  return `
-  <li>
-  <div class="card">
-    <div class="card-body">
-      <p class = 'story-score'>Objectivity Score: 4.6</p>
-      <img class="story-thumbnail" src="${story.urlToImage}" alt="">
-      <h4 class ='story-title'>${story.title}</h4>
-      <p class="lead story-description">${story.description}</p>
-      <p class= 'story-author'>Author : ${story.author}</p>
-      <p class= 'story-publishedAt'>Published At: ${story.publishedAt} </p>
-      <a class='story-url' href='${story.url}' target=”_blank">Link to Full story</a>
-    </div>
-  </div>
-</li>
-  `;
-}
-
-function generateSourceHeadline(headline) {
-  return `
-  <h3> <a href="${headline.source_info[1]}" target=”_blank">${headline.source_info[0]}</a> Top Stories for <b>Trump</b> Feb 1 - Feb 4 </h3>
-  <h4 class='column_title_leftpadded'>Average Objectivity Score: ${headline.overall_rating}</h4>
-  `;
 }
 
 function clear() {
