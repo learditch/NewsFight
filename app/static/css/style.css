@@ -1,5 +1,42 @@
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 li {
   list-style: none;
+}
+
+.title-hr {
+  background: #e80404;
+  height: 0.25rem;
+}
+
+.title {
+  font-family: canada-type-gibson, sans-serif;
+  font-weight: 900;
+  display: inline-block;
+}
+
+.title::after {
+  content: "";
+  display: block;
+  border-top: 6px solid #e80404;
+}
+
+.globe-svg {
+  display: inline;
+  height: 47px;
+  width: 47px;
+  padding-bottom: 7px;
+}
+
+.title-container {
+  text-align: center;
+}
+
+.source-select-container {
+  text-align: center;
 }
 
 .story-thumbnail {

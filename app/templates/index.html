@@ -1,20 +1,39 @@
 {% extends 'base.html' %} {% block title %} News Fight {% endblock %} {% block
 content %}
-<div class="d-flex justify-content-center mb-4">
-  <h1>News Fight</h1>
+<div class="title-container d-flex flex-column justify-content-center mb-4">
+  <div class="title-text-container">
+    <h1 class="title">
+      NEWS <img class='globe-svg' src="{{ url_for('static',
+      filename="assets/globe.svg") }}" alt=""> FIGHT
+    </h1>
+    <!-- <div class="title-hr-container">
+    <hr class='title-hr'>
+  </div> -->
+  </div>
 </div>
+
 <div class="container mb-3">
   <div class="row justify-content-md-center">
     <dv class="form-group">
-      <form action="/search" class="searchForm"  method="POST">
-        <input
+      <form action="/search" class="form-inline searchForm" method="POST">
+        <!-- <input
           type="text"
           class="searchInput"
           id="topic_search"
           name="topic_search"
           placeholder="input a topic"
-        />
-        <button class="btn btn-primary">Search Articles</button>
+        /> -->
+        <div class="form-group mb-2">
+          <label for="topic_search" class="mr-3">Enter A Topic</label>
+          <input
+            name="topic_search"
+            type="text"
+            class="form-control searchInput mr-3"
+            id="topic_search"
+            placeholder="e.g. 'China' or 'Trump'"
+          />
+          <button class="btn btn-primary">Search Articles</button>
+        </div>
       </form>
     </dv>
   </div>
@@ -22,47 +41,45 @@ content %}
 <div class="contaier">
   <div class="row">
     <div class="col">
-       <!-- LEFT NEWS SOURCES-->        <!-- LEFT NEWS SOURCES- -->
-      <label for="left_sources">Choose a News Source</label>
-      <select name="left_sources" id="left-sources">
+      <!-- LEFT NEWS SOURCES-->
+      <!-- LEFT NEWS SOURCES- -->
+      <div class="source-select-container">
+      <label for="left_sources">Select a News Source</label>
+      <select name="left_sources" class="form-control" id="left-sources">
         {% for source in sources %}
-        <option data-fullurl="{{source['full_url']}}" value="{{source['formatted_url']}}">{{source['name']}}</option>
+        <option
+          data-fullurl="{{source['full_url']}}"
+          value="{{source['formatted_url']}}"
+        >
+          {{source['name']}}
+        </option>
         {% endfor %}
       </select>
-      <!-- <h3> <a href="https://www.cnn.com">CNN</a> Top Stories for <b>Trump</b> Feb 1 - Feb 4 </h3>
-      <h4 class='column_title_leftpadded'>Average Objectivity Score: 4.3</h4> -->
-      <!-- LEFT NEWS SOURCES-->        <!-- LEFT NEWS SOURCES- -->
-      <ul class ='stories' id="stories-left">
-        <!-- TEMPLATE -->        <!-- TEMPLATE -->
-        <!-- <li>
-          <div class="card">
-            <div class="card-body">
-              <p>Objectivity Score: 4.6</p>
-              <img class="story-thumbnail" src="https://cdn.cnn.com/cnnnext/dam/assets/210202112943-lindsey-graham-liz-cheney-split-super-tease.jpg" alt="">
-              <h4>Many voters feel betrayed after GOP lawmaker's impeachment vote</h4>
-              <p class="lead">CNN's Kyung Lah speaks with Trump supporters in Washington state who say they feel betrayed after Rep. Dan Newhouse (R-WA) voted yes on the articles of impeachment of President Donald Trump.</p>
-              <p>Author : Jill Filipovic</p>
-              <p>Published At: 2021-02-03T11:02:47Z </p>
-              <a href='https://www.cnn.com/videos/politics/2021/02/03/donald-trump-supporters-dan-newhouse-impeachment-vote-lah-pgk-vpx-lead.cnn'>Link to Full story</a>
-            </div>
-          </div>
-        </li> -->
-         <!-- TEMPLATE -->        <!-- TEMPLATE -->
+    </div> 
+      <!-- LEFT NEWS SOURCES-->
+      <!-- LEFT NEWS SOURCES- -->
+      <ul class="stories" id="stories-left">
       </ul>
     </div>
-
-    <!-- RIGHT NEWS SOURCES-->        <!-- RIGHT NEWS SOURCES- -->
+    <!-- RIGHT NEWS SOURCES-->
+    <!-- RIGHT NEWS SOURCES- -->
     <div class="col">
-      <label for="right_sources">Choose a News Source</label>
-      <select name="right_sources" id="right-sources">
-        {% for source in sources %}
-        <option data-fullurl="{{source['full_url']}}" value="{{source['formatted_url']}}">{{source['name']}}</option>
-        {% endfor %}
-      </select>
-          <!-- RIGHT NEWS SOURCES-->        <!-- RIGHT NEWS SOURCES- -->
-      <ul class ='stories' id="stories-right">
-
-      </ul>
+      <div class="source-select-container">
+        <label for="right_sources">Select a News Source</label>
+        <select name="right_sources" class="form-control" id="right-sources">
+          {% for source in sources %}
+          <option
+            data-fullurl="{{source['full_url']}}"
+            value="{{source['formatted_url']}}"
+          >
+            {{source['name']}}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+      <!-- RIGHT NEWS SOURCES-->
+      <!-- RIGHT NEWS SOURCES- -->
+      <ul class="stories" id="stories-right"></ul>
     </div>
   </div>
 </div>
