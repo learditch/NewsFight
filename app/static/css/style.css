@@ -7,6 +7,14 @@ li {
   list-style: none;
 }
 
+a {
+  color: rgb(0, 117, 178) !important;
+}
+
+button {
+  outline: none !important;
+}
+
 .title-hr {
   background: #e80404;
   height: 0.25rem;

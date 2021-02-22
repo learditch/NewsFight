@@ -71,3 +71,8 @@ def sourcesQuery():
                            'lang': s.language
                            })
     return sourceList
+
+
+# for value in db.session.query(NewsSources.category).distinct():
+
+# Reformat the source object for category 
