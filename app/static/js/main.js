@@ -4,6 +4,7 @@ import views from "./modules/views.js";
 // console.log(api.testText());
 const searchParent = document.querySelector(".searchForm");
 const searchInput = document.querySelector(".searchInput");
+const $storyContainer = $(".story-container");
 const $leftStoriesList = $("#stories-left");
 const $rightStoriesList = $("#stories-right");
 let storyList;
@@ -43,10 +44,7 @@ class StoryList {
   }
   static async getStories(topic) {
     try {
-      const data = await api.getArticles(
-          topic,
-          getSourceData()
-        );
+      const data = await api.getArticles(topic, getSourceData());
       console.log(data);
       const leftStoriesHl = data.left.headline;
       const leftStories = data.left.stories.map((story) => new Story(story));
@@ -107,6 +105,7 @@ const getQuery = function () {
 searchParent.addEventListener("submit", async function (e) {
   e.preventDefault();
   clear();
+
   const topic = getQuery();
   if (!topic) return;
   await getAndShowStories(topic);

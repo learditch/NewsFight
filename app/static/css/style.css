@@ -47,6 +47,50 @@ button {
   text-align: center;
 }
 
+/* .spinner {
+  margin: 5rem auto;
+  text-align: center;
+}
+.spinner svg {
+  height: 6rem;
+  width: 6rem;
+  fill: #f38e82;
+  animation: rotate 2s linear infinite;
+} */
+
+.spinner {
+  visibility: hidden;
+  width: 80px;
+  height: 80px;
+
+  border: 2px solid #f3f3f3;
+  border-top: 3px solid #f25a41;
+  border-radius: 100%;
+
+  position: absolute;
+  top: 15%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding-top: 2rem;
+  margin: auto;
+
+  animation: spin 1s infinite linear;
+}
+
+.spinner.show {
+  visibility: visible;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .story-thumbnail {
   border: 1px solid #ddd;
   border-radius: 4px;

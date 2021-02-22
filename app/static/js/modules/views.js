@@ -27,4 +27,10 @@ export default {
             </ul>
         `;
   },
+  generateSpinner: () => {
+    return `
+    <div id="spinner"></div>  `;
+  },
+
+  // /Users/huntervanlear/Desktop/NewsFightProject/NewsFight/app/static/assets/icons.svg
 };
