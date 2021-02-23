@@ -10,6 +10,11 @@ import requests
 #     return jsonify({'message': ' Query Not Found, Please try again'}), 500
 
 
+@app.errorhandler(500)
+def serverError(error):
+    return jsonify({'message': 'No Stories Found For this Topic'}), 500
+
+
 @app.route('/')
 @app.route('/index')
 def index():

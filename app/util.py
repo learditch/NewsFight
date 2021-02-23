@@ -1,11 +1,21 @@
 import requests
+import datetime
 from app.sentAn import sentiment_scores
 from app import db
 from app.secrets import API_KEY
 from app.models import NewsSources
 from urllib.parse import urlparse, urlsplit
 
+
 BASE_URL = 'https://newsapi.org/v2/'
+TODAY = datetime.date.today()
+
+
+def getLastMonthDate(today):
+    previous_month = today.month - 1
+    if previous_month == 0:
+        previous_month = 12
+    return f'{today.year}-{previous_month}-{today.day}'
 
 # https://newsapi.org/v2/everything?q=fire&from=2020-09-09&to=2020-09-09&domains=foxnews.com&sortBy=popularity&apiKey=b31bcb1b64a847a6ae2e34abd641b31c
 
@@ -15,7 +25,7 @@ class NewsData:
         self.domain = domain
         self.q = q
         self.art_res = requests.get(f'{BASE_URL}/everything', params={'apiKey': API_KEY, 'q': q,
-                                                                      'from': '2021-02-02', 'to': '2021-02-17', 'domains': domain, 'sortBy': 'popularity'})
+                                                                      'from': getLastMonthDate(TODAY), 'to': TODAY, 'domains': domain, 'sortBy': 'publishedAt'})
         self.art_data = self.art_res.json()
         self.source_res = requests.get(
             f'{BASE_URL}/sources', params={'apiKey': API_KEY, 'language': 'en'})
@@ -75,4 +85,4 @@ def sourcesQuery():
 
 # for value in db.session.query(NewsSources.category).distinct():
 
-# Reformat the source object for category 
+# Reformat the source object for category

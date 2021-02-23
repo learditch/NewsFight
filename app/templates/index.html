@@ -45,8 +45,9 @@ content %}
       <!-- LEFT NEWS SOURCES-->
       <!-- LEFT NEWS SOURCES- -->
       <div class="source-select-container">
-      <label for="left_sources">Select a News Source</label>
+      <!-- <label for="left_sources">Select a News Source</label> -->
       <select name="left_sources" class="form-control" id="left-sources">
+        <option disabled selected value> -- Select a News Source -- </option>
         {% for source in sources %}
         <option
           data-fullurl="{{source['full_url']}}"
@@ -67,8 +68,9 @@ content %}
     <!-- RIGHT NEWS SOURCES- -->
     <div class="col">
       <div class="source-select-container">
-        <label for="right_sources">Select a News Source</label>
+        <!-- <label for="right_sources">Select a News Source</label> -->
         <select name="right_sources" class="form-control" id="right-sources">
+          <option disabled selected value> -- Select a News Source -- </option>
           {% for source in sources %}
           <option
             data-fullurl="{{source['full_url']}}"

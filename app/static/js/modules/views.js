@@ -18,18 +18,22 @@ export default {
   },
   generateSourceHeadline: (headline) => {
     return `
-            <h3> <a href="${headline.source_info[1]}" target=”_blank">${headline.source_info[0]}</a> Top Stories for <b>Trump</b> Feb 1 - Feb 4 </h3>
+            <h3> <a href="${headline.source_info[1]}" target=”_blank">${
+      headline.source_info[0]
+    }</a> Top Stories for <b>Trump</b> Feb 1 - Feb 4 </h3>
             <h4 class='column_title_left padded'>Average Article Ratings:</h4>
             <ul>
-            <li>${headline.average_ratings.overallNegAvg}% Negative</li>
-            <li>${headline.average_ratings.overallNeuAvg}% Netural</li>
-            <li>${headline.average_ratings.overallPosAvg}% Positive</li>
+            <li>Negative: ${headline.average_ratings.overallNegAvg.toFixed(
+              2
+            )}% </li>
+            <li>Netural: ${headline.average_ratings.overallNeuAvg.toFixed(
+              2
+            )}%</li>
+            <li>Positive: ${headline.average_ratings.overallPosAvg.toFixed(
+              2
+            )}% </li>
             </ul>
         `;
-  },
-  generateSpinner: () => {
-    return `
-    <div id="spinner"></div>  `;
   },
 
   // /Users/huntervanlear/Desktop/NewsFightProject/NewsFight/app/static/assets/icons.svg
