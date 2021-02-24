@@ -7,10 +7,6 @@ li {
   list-style: none;
 }
 
-a {
-  color: rgb(0, 117, 178) !important;
-}
-
 button {
   outline: none !important;
 }
@@ -89,6 +85,15 @@ button {
   to {
     transform: rotate(360deg);
   }
+}
+
+.stories {
+  margin-top: 2rem;
+}
+
+.story-icon-tray {
+  display: flex;
+  flex-direction: row;
 }
 
 .story-thumbnail {

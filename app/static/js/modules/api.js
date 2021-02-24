@@ -1,5 +1,7 @@
 const spinner = document.querySelector(".spinner");
 
+//change spinner method
+
 export default {
   testText: () => {
     return "Test text";

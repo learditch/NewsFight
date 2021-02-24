@@ -45,7 +45,6 @@ class StoryList {
   static async getStories(topic) {
     try {
       const data = await api.getArticles(topic, getSourceData());
-      console.log(data);
       const leftStoriesHl = data.left.headline;
       const leftStories = data.left.stories.map((story) => new Story(story));
       const rightStoriesHl = data.right.headline;

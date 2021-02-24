@@ -15,7 +15,11 @@ export default {
         <li>
         <div class="card">
           <div class="card-body">
-            <p class = 'story-score'>Objectivity Score: 4.6</p>
+            <div class ='story-icon-tray'>
+            <p class='story-score story-score-icon'><img src="../../assets/positive.png" alt=""> POSITIVE SCORE</p>
+            <p class='story-score story-score-icon'>NETURAL SCORE</p>
+            <p class='story-score story-score-icon'>NEGATIVE SCORE</p>
+            </div>
             <img class="story-thumbnail" src="${checkForNullSrc(
               story.urlToImage
             )}"  alt="">
@@ -40,17 +44,26 @@ export default {
     }</a> Top Stories for <b>Trump</b> Feb 1 - Feb 4 </h3>
             <h4 class='column_title_left padded'>Average Article Ratings:</h4>
             <ul>
-            <li>Negative: ${headline.average_ratings.overallNegAvg.toFixed(
+            <li>Positive: ${headline.average_ratings.overallPosAvg.toFixed(
               2
             )}% </li>
             <li>Netural: ${headline.average_ratings.overallNeuAvg.toFixed(
               2
             )}%</li>
-            <li>Positive: ${headline.average_ratings.overallPosAvg.toFixed(
+            <li>Negative: ${headline.average_ratings.overallNegAvg.toFixed(
               2
             )}% </li>
             </ul>
         `;
+  },
+  generateError: () => {
+    return;
+    `
+    <div class="error">
+
+            <p>No Stories found for this topic</p>
+          </div>
+    `;
   },
 
   // /Users/huntervanlear/Desktop/NewsFightProject/NewsFight/app/static/assets/icons.svg
