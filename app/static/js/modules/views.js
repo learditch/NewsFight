@@ -16,7 +16,7 @@ export default {
         <div class="card">
           <div class="card-body">
             <div class ='story-icon-tray'>
-            <p class='story-score story-score-icon'><img src="../../assets/positive.png" alt=""> POSITIVE SCORE</p>
+            <p class='story-score story-score-icon'><img src="{{ url_for('static', filename='assets/positive.png') }}" alt=""> POSITIVE SCORE</p>
             <p class='story-score story-score-icon'>NETURAL SCORE</p>
             <p class='story-score story-score-icon'>NEGATIVE SCORE</p>
             </div>
@@ -56,12 +56,11 @@ export default {
             </ul>
         `;
   },
-  generateError: () => {
+  generateError: (error) => {
     return;
     `
     <div class="error">
-
-            <p>No Stories found for this topic</p>
+            <p>ERROR</p>
           </div>
     `;
   },

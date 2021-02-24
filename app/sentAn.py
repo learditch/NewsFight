@@ -2,12 +2,13 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
 
 def average(scores, score_key):
-    if len(scores=0):
-        return
     new_list = []
     for score in scores:
         new_list.append(score[score_key])
-    avg = round(sum(new_list) / len(new_list), 2)
+    try:
+        avg = round(sum(new_list) / len(new_list), 2)
+    except ZeroDivisionError:
+        avg = 0
     return avg
 
 

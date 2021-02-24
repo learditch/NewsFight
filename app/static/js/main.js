@@ -65,7 +65,11 @@ async function getAndShowStories(topic) {
   storyList = await StoryList.getStories(topic);
   // console.log(storyList);
   //add loading wheel
-  putStoriesOnPage();
+  try {
+    putStoriesOnPage();
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 function putStoriesOnPage() {

@@ -5,11 +5,6 @@ from app.util import NewsData, sourcesQuery
 import requests
 
 
-# @app.errorhandler(500)
-# def serverError(error):
-#     return jsonify({'message': ' Query Not Found, Please try again'}), 500
-
-
 @app.errorhandler(500)
 def serverError(error):
     return jsonify({'message': 'No Stories Found For this Topic'}), 500
@@ -32,6 +27,7 @@ def updated_search(topic):
     req = request.get_json()
     left_stories_data = NewsData(req['left_source'], topic).getArticles()
     right_stories_data = NewsData(req['right_source'], topic).getArticles()
+
     # print(left_stories_data)
     newsResponse = {
         'topic': topic,
