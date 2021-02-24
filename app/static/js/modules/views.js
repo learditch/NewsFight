@@ -16,9 +16,9 @@ export default {
         <div class="card">
           <div class="card-body">
             <div class ='story-icon-tray'>
-            <p class='story-score story-score-icon'><img src="{{ url_for('static', filename='assets/positive.png') }}" alt=""> POSITIVE SCORE</p>
-            <p class='story-score story-score-icon'>NETURAL SCORE</p>
-            <p class='story-score story-score-icon'>NEGATIVE SCORE</p>
+            <p class='story-score story-score-icon'><img src="static/assets/positive.png" alt=""> POSITIVE SCORE</p>
+            <p class='story-score story-score-icon'><img src="static/assets/neutral.png" alt="">NETURAL SCORE</p>
+            <p class='story-score story-score-icon'><img src="static/assets/negative.png" alt="">NEGATIVE SCORE</p>
             </div>
             <img class="story-thumbnail" src="${checkForNullSrc(
               story.urlToImage
