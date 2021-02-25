@@ -52,7 +52,7 @@ export default {
     return `
             <h3> <a href="${headline.source_info[1]}" target=”_blank">${
       headline.source_info[0]
-    }</a> Top Stories for <b>Trump</b> Feb 1 - Feb 4 </h3>
+    }</a> Top <b>${headline.topic}</b> Stories for ${headline.date}</h3>
             <h4 class='column_title_left padded'>Average Article Ratings:</h4>
             <ul class='story-list-scores'>
             <li>Positive: ${headline.average_ratings.overallPosAvg.toFixed(

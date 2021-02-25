@@ -1,7 +1,7 @@
 from flask import render_template, url_for, request, jsonify, make_response
 from app.models import NewsSources
-from app import app
-from app.util import NewsData, sourcesQuery
+from app import app, db
+from app.util import NewsData, sourcesQuery, populateSourcesTable, TODAY, getLastMonthDate
 import requests
 
 
@@ -13,7 +13,8 @@ def serverError(error):
 @app.route('/')
 @app.route('/index')
 def index():
-    # possibly call class methods in jinja?
+    if len(NewsSources.query.all()) < 1:
+        populateSourcesTable()
     sources = sourcesQuery()
     return render_template('index.html', sources=sources)
 
@@ -28,15 +29,12 @@ def updated_search(topic):
     left_stories_data = NewsData(req['left_source'], topic).getArticles()
     right_stories_data = NewsData(req['right_source'], topic).getArticles()
 
-    # print(left_stories_data)
     newsResponse = {
-        'topic': topic,
-        'date': 'Feb 1 - Feb 2',
         'left': {'headline': {'source_info': [req['left_source_name'], req['left_source_full']],
-                              'average_ratings': left_stories_data['articleScores']},
+                              'average_ratings': left_stories_data['articleScores'], 'date': f'{getLastMonthDate(TODAY)} to {TODAY}', 'topic': topic},
                  'stories': left_stories_data['articleList']},
         'right': {'headline': {'source_info': [req['right_source_name'], req['right_source_full']],
-                               'average_ratings': right_stories_data['articleScores']},
+                               'average_ratings': right_stories_data['articleScores'], 'date': f'{getLastMonthDate(TODAY)} to {TODAY}', 'topic': topic},
                   'stories': right_stories_data['articleList']}
     }
     res = make_response(newsResponse, 200)
