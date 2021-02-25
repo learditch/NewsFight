@@ -10,6 +10,11 @@ def serverError(error):
     return jsonify({'message': 'No Stories Found For this Topic'}), 500
 
 
+@app.errorhandler(404)
+def not_found_error(error):
+    return render_template('404.html'), 404
+
+
 @app.route('/')
 @app.route('/index')
 def index():
