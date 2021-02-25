@@ -20,34 +20,19 @@ footer {
   height: 20px;
 }
 
-.navbar-fixed {
-  top: 0;
-  z-index: 100;
+.sticky {
   position: fixed;
+  top: 0;
   width: 100%;
 }
 
-#nav_bar {
-  border: 0;
-  background-color: #202020;
-  border-radius: 0px;
-  margin-bottom: 0;
-  height: 30px;
+.sticky + .content {
+  padding-top: 60px;
 }
 
-.nav_links {
-  margin: 0;
-}
-
-.nav_links li {
-  display: inline-block;
-  margin-top: 4px;
-}
-
-.nav_links li a {
-  padding: 0 15.5px;
-  color: #3498db;
-  text-decoration: none;
+#navbar {
+  margin-left: 2rem;
+  z-index: 1000;
 }
 
 .title-hr {
