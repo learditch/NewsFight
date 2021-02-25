@@ -9,6 +9,10 @@ function checkForNullSrc(storySrc) {
         "https://getuikit.com/v2/docs/images/placeholder_200x100.svg");
 }
 
+function formatStoryScore(score) {
+  return (score * 100).toFixed(2);
+}
+
 export default {
   generateStoryMarkup: (story) => {
     return `
@@ -16,9 +20,16 @@ export default {
         <div class="card">
           <div class="card-body">
             <div class ='story-icon-tray'>
-            <p class='story-score story-score-icon'><img src="static/assets/positive.png" alt=""> POSITIVE SCORE</p>
-            <p class='story-score story-score-icon'><img src="static/assets/neutral.png" alt="">NETURAL SCORE</p>
-            <p class='story-score story-score-icon'><img src="static/assets/negative.png" alt="">NEGATIVE SCORE</p>
+
+            <p class='story-score' data-tooltip="This Story's Positive Rating"><img class='story-icon' src="static/assets/positive.png" alt="">${formatStoryScore(
+              story.pos
+            )}%</p>
+            <p class='story-score' data-tooltip="This Story's Neutral Rating"><img class='story-icon' src="static/assets/neutral.png" alt="">${formatStoryScore(
+              story.neu
+            )}%</p>
+            <p class='story-score' data-tooltip="This Story's Negative Rating"><img class='story-icon' src="static/assets/negative.png" alt="">${formatStoryScore(
+              story.neg
+            )}%</p>
             </div>
             <img class="story-thumbnail" src="${checkForNullSrc(
               story.urlToImage
@@ -43,7 +54,7 @@ export default {
       headline.source_info[0]
     }</a> Top Stories for <b>Trump</b> Feb 1 - Feb 4 </h3>
             <h4 class='column_title_left padded'>Average Article Ratings:</h4>
-            <ul>
+            <ul class='story-list-scores'>
             <li>Positive: ${headline.average_ratings.overallPosAvg.toFixed(
               2
             )}% </li>

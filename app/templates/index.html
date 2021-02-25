@@ -1,5 +1,6 @@
 {% extends 'base.html' %} {% block title %} News Fight {% endblock %} {% block
 content %}
+
 <div class="title-container d-flex flex-column justify-content-center mb-4">
   <div class="title-text-container">
     <h1 class="title">
@@ -93,9 +94,9 @@ content %}
   </div>
 </div>
 <!-- Library JS & our JS -->
-<script src="https://unpkg.com/jquery"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+
 <script type="module" src="/static/js/modules/views.js"></script> 
 <script type="module" src="/static/js/modules/api.js"></script> 
 <script type="module" src="{{ url_for('static', filename="JS/main.js") }}"></script> 
-
 {% endblock %}

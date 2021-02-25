@@ -43,17 +43,6 @@ button {
   text-align: center;
 }
 
-/* .spinner {
-  margin: 5rem auto;
-  text-align: center;
-}
-.spinner svg {
-  height: 6rem;
-  width: 6rem;
-  fill: #f38e82;
-  animation: rotate 2s linear infinite;
-} */
-
 .spinner {
   visibility: hidden;
   width: 80px;
@@ -87,6 +76,12 @@ button {
   }
 }
 
+.story-list-scores {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-left: 0 !important;
+}
+
 .stories {
   margin-top: 2rem;
 }
@@ -94,6 +89,47 @@ button {
 .story-icon-tray {
   display: flex;
   flex-direction: row;
+}
+
+[data-tooltip] {
+  position: relative;
+  cursor: default;
+}
+
+[data-tooltip]::after {
+  position: absolute;
+  width: 140px;
+  left: calc(50% - 70px);
+  bottom: 125%;
+  text-align: center;
+  box-sizing: border-box;
+
+  content: attr(data-tooltip);
+  color: #f3f3f3;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 8px;
+  border-radius: 10px;
+  font-size: 0.8rem;
+
+  visibility: hidden;
+  opacity: 0;
+
+  transform: translateY(10px);
+  transition: opacity 0.3s, transform 0.2s;
+}
+
+[data-tooltip]:hover::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.story-icon-tray p:not(:first-child) {
+  margin-left: 1rem;
+}
+
+img.story-icon {
+  width: 1.4rem;
 }
 
 .story-thumbnail {

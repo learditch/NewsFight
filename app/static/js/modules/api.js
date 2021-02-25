@@ -30,8 +30,7 @@ export default {
       if (!res.ok) throw new Error(`${data.message} (${res.status})`);
       return data;
     } catch (err) {
-      // throw err
-      console.log("HELLLO");
+      throw err;
     }
   },
 };
