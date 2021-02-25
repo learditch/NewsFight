@@ -4,7 +4,8 @@
 }
 
 main {
-  min-height: calc(100vh - 120px);
+  min-height: calc(100vh - 100px);
+  margin-top: 3rem;
 }
 
 li {
@@ -16,7 +17,37 @@ button {
 }
 
 footer {
-  height: 40px;
+  height: 20px;
+}
+
+.navbar-fixed {
+  top: 0;
+  z-index: 100;
+  position: fixed;
+  width: 100%;
+}
+
+#nav_bar {
+  border: 0;
+  background-color: #202020;
+  border-radius: 0px;
+  margin-bottom: 0;
+  height: 30px;
+}
+
+.nav_links {
+  margin: 0;
+}
+
+.nav_links li {
+  display: inline-block;
+  margin-top: 4px;
+}
+
+.nav_links li a {
+  padding: 0 15.5px;
+  color: #3498db;
+  text-decoration: none;
 }
 
 .title-hr {
@@ -163,6 +194,7 @@ img.story-icon {
 
 #copy {
   color: #e80404;
+  font-size: 0.8rem;
   /* position: absolute;
   bottom: 0; */
 }

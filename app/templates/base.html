@@ -25,8 +25,14 @@
     {% endif %}
   </head>
   <body>
-    <div>News Fight: <a href="/index">Home</a></div>
-    <hr />
+    <nav id="nav_bar">
+      <ul class="nav_links">
+        <li><a href="/index">News Fight</a></li>
+        <li><a href="#">About</a></li>
+      </ul>
+    </nav>
+    <!-- <div>News Fight: <a href="/index">Home</a></div>
+    <hr /> -->
     <div class="container">
       <main>{% block content %}CONTENT HERE{% endblock %}</main>
       <footer class="d-flex justify-content-center">
