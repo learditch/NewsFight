@@ -3,12 +3,20 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+main {
+  min-height: calc(100vh - 120px);
+}
+
 li {
   list-style: none;
 }
 
 button {
   outline: none !important;
+}
+
+footer {
+  height: 40px;
 }
 
 .title-hr {
@@ -155,7 +163,6 @@ img.story-icon {
 
 #copy {
   color: #e80404;
-  position: relative;
-  font-size: 0.7rem;
-  bottom: 10px;
+  /* position: absolute;
+  bottom: 0; */
 }
