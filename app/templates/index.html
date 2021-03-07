@@ -32,6 +32,7 @@ content %}
             class="form-control searchInput mr-3"
             id="topic_search"
             placeholder="e.g. 'China' or 'Trump'"
+            required
           />
           <button class="btn btn-primary">Search Articles</button>
           
@@ -48,8 +49,8 @@ content %}
       <!-- LEFT NEWS SOURCES- -->
       <div class="source-select-container">
       <!-- <label for="left_sources">Select a News Source</label> -->
-      <select name="left_sources" class="form-control" id="left-sources">
-        <option disabled selected value> -- Select a News Source -- </option>
+      <select name="left_sources" class="form-control" id="left-sources" required>
+        <option disabled selected value=""> -- Select a News Source -- </option>
         {% for source in sources %}
         <option
           data-fullurl="{{source['full_url']}}"
@@ -71,8 +72,8 @@ content %}
     <div class="col">
       <div class="source-select-container">
         <!-- <label for="right_sources">Select a News Source</label> -->
-        <select name="right_sources" class="form-control" id="right-sources">
-          <option disabled selected value> -- Select a News Source -- </option>
+        <select name="right_sources" class="form-control" id="right-sources" >
+          <option disabled selected value=""> -- Select a News Source -- </option>
           {% for source in sources %}
           <option
             data-fullurl="{{source['full_url']}}"
